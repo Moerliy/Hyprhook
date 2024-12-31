@@ -55,7 +55,8 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
             if (it == Global::functionsMap.end()) {
                 return;
             }
-
+            const CHyprColor errorColor(0.0f, 0.0f, 1.0f, 1.0f);
+            HyprlandAPI::addNotification(Global::PHANDLE, std::format("[{}] exec.", event), errorColor, 5000);
             const std::string& script   = *Global::eventMap[event];
             const std::string& spawnStr = script + " '" + it->second(data) + "'";
             g_pKeybindManager->spawn(spawnStr);
